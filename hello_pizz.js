@@ -1,63 +1,44 @@
 
 class HelloSound {
     
-    constructor(freq) {
+    constructor() {
         this.voice1 = {
-            pitches: [60],
+            pitches: [80],
             velocities: [100],
             durations: [1]
         }
-        this.instrument = new Pizzicato.Sound({ 
+        this.instrument1 = new Pizzicato.Sound({ 
             source: 'wave', 
             options: {
                 type: 'sawtooth',
-                frequency: freq
+                frequency: this.voice1.pitches[0]
             }
         });
-        this.button = document.getElementById("test");
+        this.playButton = document.getElementById("play");
+        this.stopButton = document.getElementById("stop");
 
         console.log(this.button)
         
-        this.button.addEventListener('click', () => {
-            console.log("event listener")
-            this.play(220)
-            this.instrument.stop()
+        this.playButton.addEventListener('click', () => {
+            console.log("play event listener")
+            this.play();
         });
+
+        this.stopButton.addEventListener('click', () => {
+            console.log("stop event listener")
+            this.stop()
+        })
     }
 
-    play(freq) {
+    play() {
         console.log("playing") 
-        
-        var test_instrument = new Pizzicato.Sound({ 
-            source: 'wave', 
-            options: {
-                type: 'sawtooth',
-                frequency: freq
-            }
-        });
 
-        test_instrument.play(freq);
-        /*
-        this.instrument.attack = 0.5;
-        this.instrument.release = 1;
-
-        this.instrument.play(freq);
-        */
+        this.instrument1.play();
     }
 
     stop() {
-        this.instrument.stop();
+        this.instrument1.stop();
     }
 }
 
-let user_sound = new HelloSound(220);
-
-let outside_instrument = new Pizzicato.Sound({ 
-    source: 'wave', 
-    options: {
-        type: 'sawtooth',
-        frequency: 300
-    }
-});
-
-outside_instrument.play(220);
+let user_sound = new HelloSound();
