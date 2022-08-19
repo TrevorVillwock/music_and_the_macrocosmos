@@ -1,17 +1,23 @@
-function play() {
+function play(freq) {
     console.log("playing")
-    var sineWave = new Pizzicato.Sound({ 
+    var sawWave = new Pizzicato.Sound({ 
         source: 'wave', 
         options: {
-            frequency: 440
+            type: 'sawtooth'
+            frequency: freq,
+            type: 'sawtooth'
         }
     });
 
-    sineWave.play();
+    sawWave.attack = 0.5;
+    sawWave.release = 1;
+
+    sawWave.play();
 }
 
 var button = document.getElementById("test");
 
-button.addEventListener('click', () => {play()});
-
-//<script type="module" src="./hello_pizz.js"></script>
+button.addEventListener('click', () => {
+    play(220);
+    //setTimeout(() => { play(330) }, 1000);
+});
