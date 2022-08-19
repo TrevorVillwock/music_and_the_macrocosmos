@@ -3,9 +3,8 @@ function play(freq) {
     var sawWave = new Pizzicato.Sound({ 
         source: 'wave', 
         options: {
-            type: 'sawtooth'
-            frequency: freq,
-            type: 'sawtooth'
+            type: 'sawtooth',
+            frequency: freq
         }
     });
 
@@ -19,5 +18,4 @@ var button = document.getElementById("test");
 
 button.addEventListener('click', () => {
     play(220);
-    //setTimeout(() => { play(330) }, 1000);
 });
