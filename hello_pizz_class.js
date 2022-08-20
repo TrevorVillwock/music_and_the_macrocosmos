@@ -11,12 +11,13 @@ class HelloSound {
             source: 'wave', 
             options: {
                 type: 'sawtooth',
-                frequency: 440 //this.voice1.pitches[0]
+                frequency: 220, //this.voice1.pitches[0],
+                volume: 0.01
             }
         });
 
-        this.playButton = document.getElementById("play");
-        this.stopButton = document.getElementById("stop");
+        this.playButton = document.getElementById("play class");
+        this.stopButton = document.getElementById("stop class");
         
         this.playButton.addEventListener('click', () => {
             console.log("play event listener")
