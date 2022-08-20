@@ -3,7 +3,7 @@ var sawWave = new Pizzicato.Sound({
     options: {
         type: 'sawtooth',
         frequency: 220,
-        volume: 0.01
+        volume: 0.1
     }
 });
 

@@ -1,4 +1,4 @@
-class HelloSound {
+class Player {
     
     constructor() {
 
@@ -47,10 +47,8 @@ class HelloSound {
         this.instrument1.stop();
     }
     
-    // melody will be a Melody object with arrays for pitches, volumes, and durations
-    // for the given melody
-    /**
- 
+
+/**
  * @param {Melody} melody - The melody to play. Melody will be a Melody object 
  *   with pitches, volumes, and durations as integer arrays as well as tempo 
  *   (quarter note length in milliseconds) as an integer
