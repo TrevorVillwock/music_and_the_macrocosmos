@@ -1,23 +1,22 @@
-
 class HelloSound {
     
     constructor() {
         this.voice1 = {
-            pitches: [80],
+            pitches: [440],
             velocities: [100],
             durations: [1]
         }
+
         this.instrument1 = new Pizzicato.Sound({ 
             source: 'wave', 
             options: {
                 type: 'sawtooth',
-                frequency: this.voice1.pitches[0]
+                frequency: 440 //this.voice1.pitches[0]
             }
         });
+
         this.playButton = document.getElementById("play");
         this.stopButton = document.getElementById("stop");
-
-        console.log(this.button)
         
         this.playButton.addEventListener('click', () => {
             console.log("play event listener")
@@ -32,11 +31,11 @@ class HelloSound {
 
     play() {
         console.log("playing") 
-
         this.instrument1.play();
     }
 
     stop() {
+        console.log("stopping")
         this.instrument1.stop();
     }
 }
