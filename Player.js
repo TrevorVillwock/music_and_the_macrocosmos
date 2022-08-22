@@ -3,6 +3,8 @@ class Player {
     
     constructor() {
 
+        this.isPlaying = 0; // Tracks whether anything is being played
+
         // This will be reset to the next note in the melody array
         this.note = {
             frequency: 330, // in Hertz
@@ -22,6 +24,8 @@ class Player {
         this.playButton = document.getElementById("play class");
         this.stopButton = document.getElementById("stop class");
         this.playMelodyButton = document.getElementById("play melody");
+        this.playRandomNotes = document.getElementById("play random");
+        this.stopMelodyButton = document.getElementById("stop melody");
         
         this.playButton.addEventListener('click', () => {
             console.log("play event listener");
@@ -40,7 +44,10 @@ class Player {
             })
             this.playMelody(usrMelody);
         })
-        
+        this.stopMelodyButton.addEventListener('click', () => {
+            console.log("stopping melody")
+            this.isPlaying = 0;
+        })
     }
 
     play() {
@@ -52,8 +59,6 @@ class Player {
         console.log("stopping")
         this.instrument1.stop();
     }
-    
-
 /**
  * @param {Melody} melody - The melody to play. Melody will be a Melody object 
  *   with pitches, volumes, and durations as integer arrays as well as tempo 
@@ -61,24 +66,44 @@ class Player {
  * 
  */
     async playMelody(melody) {
-        var i = 0;
-        console.log(melody.frequencies);
+        this.isPlaying = 1;
+        let i = 0;
+        while (this.isPlaying) {
+            for ( ; i < melody.notes.frequencies.length; ++i) {
+                this.instrument1 = new Pizzicato.Sound({ 
+                    source: 'wave', 
+                    options: {
+                        type: 'sawtooth',
+                        frequency: melody.notes.frequencies[i], 
+                        volume: melody.notes.volumes[i]
+                    }
+                });
 
-        for (i = 0; i < melody.notes.frequencies.length; ++i) {
+                this.play();
+                console.log("played a note");
+                await new Promise(r => setTimeout(r, melody.notes.durations[i]*1000)); // convert seconds to milliseconds
+                this.stop()
+            }
+            i = 0;
+        }  
+    }
+
+    async randomNotes() {
+        for (let i = 0; i < melody.notes.frequencies.length; ++i) {
             this.instrument1 = new Pizzicato.Sound({ 
                 source: 'wave', 
                 options: {
                     type: 'sawtooth',
                     frequency: melody.notes.frequencies[i], 
-                    volume: melody.notes.volumes[i]
+                    volume: 0.1
                 }
             });
-            
+
             this.play();
             console.log("played a note");
             await new Promise(r => setTimeout(r, melody.notes.durations[i]*1000)); // convert seconds to milliseconds
             this.stop()
-            await new Promise(r => setTimeout(r, melody.notes.durations[i]*1000));
+            //await new Promise(r => setTimeout(r, melody.notes.durations[i]*1000));
         }  
     }
 }
