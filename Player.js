@@ -24,7 +24,7 @@ class Player {
         this.playButton = document.getElementById("play class");
         this.stopButton = document.getElementById("stop class");
         this.playMelodyButton = document.getElementById("play melody");
-        this.playRandomNotes = document.getElementById("play random");
+        this.playRandomNotesButton = document.getElementById("play random");
         this.stopMelodyButton = document.getElementById("stop melody");
         
         this.playButton.addEventListener('click', () => {
@@ -47,6 +47,10 @@ class Player {
         this.stopMelodyButton.addEventListener('click', () => {
             console.log("stopping melody")
             this.isPlaying = 0;
+        })
+        this.playRandomNotesButton.addEventListener('click', () => {
+            console.log("playing random notes")
+            this.playRandomNotes();
         })
     }
 
@@ -88,20 +92,27 @@ class Player {
         }  
     }
 
-    async randomNotes() {
-        for (let i = 0; i < melody.notes.frequencies.length; ++i) {
+    async playRandomNotes() {
+        console.log("playRandomNotes");
+        this.isPlaying = 1;
+        while (this.isPlaying) {
+            console.log("setting up note");
+            let freq = 440 * Math.pow(2, (Math.round(Math.random() * 5)/12));
             this.instrument1 = new Pizzicato.Sound({ 
                 source: 'wave', 
                 options: {
                     type: 'sawtooth',
-                    frequency: melody.notes.frequencies[i], 
+                    frequency: freq, 
                     volume: 0.1
                 }
             });
 
+            console.log(440 * Math.pow(2, (Math.round(Math.random() * 5)/12)))
+
             this.play();
             console.log("played a note");
-            await new Promise(r => setTimeout(r, melody.notes.durations[i]*1000)); // convert seconds to milliseconds
+            await new Promise(r => setTimeout(r, 1000)); // convert seconds to milliseconds
+            console.log("stopping")
             this.stop()
             //await new Promise(r => setTimeout(r, melody.notes.durations[i]*1000));
         }  
