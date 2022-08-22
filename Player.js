@@ -5,7 +5,7 @@ class Player {
 
         // This will be reset to the next note in the melody array
         this.note = {
-            frequency: 220, // in Hertz
+            frequency: 330, // in Hertz
             volume: 0.1, 
             duration: 1
         }
@@ -14,8 +14,8 @@ class Player {
             source: 'wave', 
             options: {
                 type: 'sawtooth',
-                frequency: this.note.pitch, 
-                volume: this.note.volume,
+                frequency: this.note.frequency, 
+                volume: this.note.volume
             }
         });
 
@@ -65,13 +65,20 @@ class Player {
         console.log(melody.frequencies);
 
         for (i = 0; i < melody.notes.frequencies.length; ++i) {
-            this.note.frequency = melody.notes.frequencies[i];
-            this.note.volume = melody.notes.volumes[i];
+            this.instrument1 = new Pizzicato.Sound({ 
+                source: 'wave', 
+                options: {
+                    type: 'sawtooth',
+                    frequency: melody.notes.frequencies[i], 
+                    volume: melody.notes.volumes[i]
+                }
+            });
             
             this.play();
             console.log("played a note");
             await new Promise(r => setTimeout(r, melody.notes.durations[i]*1000)); // convert seconds to milliseconds
             this.stop()
+            await new Promise(r => setTimeout(r, melody.notes.durations[i]*1000));
         }  
     }
 }
