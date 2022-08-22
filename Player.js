@@ -1,10 +1,11 @@
+import {Melody} from './Melody.js'
 class Player {
     
     constructor() {
 
-        // This will be resest to the next note in the melody array
+        // This will be reset to the next note in the melody array
         this.note = {
-            pitch: 220, // in Hertz
+            frequency: 220, // in Hertz
             volume: 0.1, 
             duration: 1
         }
@@ -32,7 +33,12 @@ class Player {
         })
         this.playMelodyButton.addEventListener('click', () => {
             console.log("playing melody");
-            this.playMelody;
+            var usrMelody = new Melody({
+                frequencies: [220, 440, 330], // in Hertz
+                volumes: [0.1, 0.1, 0.1], 
+                durations: [1, 1, 1]
+            })
+            this.playMelody(usrMelody);
         })
         
     }
@@ -54,15 +60,19 @@ class Player {
  *   (quarter note length in milliseconds) as an integer
  * 
  */
-    playMelody(melody) {
-        for (i = 0; i < melody.pitches.length; ++i) {
-            this.note.pitch;
-            this.note.volume = melody.volume[i];
+    async playMelody(melody) {
+        var i = 0;
+        console.log(melody.frequencies);
+
+        for (i = 0; i < melody.notes.frequencies.length; ++i) {
+            this.note.frequency = melody.notes.frequencies[i];
+            this.note.volume = melody.notes.volumes[i];
             
-            setTimeout(() => {
-                this.play();
-            }, this.note.duration)
-        }
+            this.play();
+            console.log("played a note");
+            await new Promise(r => setTimeout(r, melody.notes.durations[i]*1000)); // convert seconds to milliseconds
+            this.stop()
+        }  
     }
 }
 
