@@ -1,11 +1,21 @@
+// Adapted from https://codepen.io/dirkk0/pen/yLMaMGa
+// This code creates a metronome with a "random speed" button
+// that will make it either speed up or slow down by a random
+// amount on each click
+
+// let player = new Tone.Player(
+//     "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1506195/keyboard-key.mp3"
+// ).toDestination();
+
 let player = new Tone.Player(
-    "https://s3-us-west-2.amazonaws.com/s.cdpn.io/1506195/keyboard-key.mp3"
+    "wood_block.wav"
 ).toDestination();
 
+// boolean variable indicating whether randomness is turned on or off
 let random = 0;
 
 Tone.Transport.bpm.value = 100;
-  
+
 Tone.Transport.scheduleRepeat((time) => {
     player.start(time).stop(time + 0.1);
 }, "4n");

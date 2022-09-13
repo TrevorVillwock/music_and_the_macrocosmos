@@ -1,9 +1,20 @@
-<script src='https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.53/Tone.js'></script>
-<script src='./metronome.js'></script>
-<p>
-  Click anywhere in this window before you hit start.</p>
-<button onclick="start()">start</button>
-<button id="stopButton" onclick="stop()">stop</button>
-<button id="randomSpeedButton" onclick="toggleRandom()">random speed</button>
-<br /><br />
-<div id="log"></div>
+<!doctype html>
+<html>
+  <head>
+    <title>Our Funky HTML Page</title>
+    <meta name="description" content="Our first page">
+    <meta name="keywords" content="html tutorial template">
+  </head>
+  <body>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.53/Tone.js'></script>
+    <script src='./metronome.js'></script>
+    <p>
+      Metronome
+    </p>
+    <button onclick="start()">start</button>
+    <button id="stopButton" onclick="stop()">stop</button>
+    <input type="checkbox" id="randomSpeedButton" onclick="toggleRandom()">random speed</button>
+    <br /><br />
+    <div id="log"></div>
+  </body>
+</html>
