@@ -11,9 +11,16 @@
     <p>
       Metronome
     </p>
-    <button onclick="start()">start</button>
-    <button id="stopButton" onclick="stop()">stop</button>
-    <input type="checkbox" id="randomSpeedButton" onclick="toggleRandom()">random speed</button>
+    <div>
+      <button onclick="start()">start</button>
+      <button id="stopButton" onclick="stop()">stop</button>
+    </div>
+    <div>
+      <input type="checkbox" id="randomSpeedButton" onclick="toggleRandom()">random speed</button>
+    </div>
+    <div>
+      <input type="range" min="0" max="200" value="100" id="volumeSlider" oninput="setVolume()">
+    </div>
     <br /><br />
     <div id="log"></div>
   </body>
